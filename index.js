@@ -6,6 +6,8 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use(express.static('public'));
+
 let movies = [
   {
     id: 1,
