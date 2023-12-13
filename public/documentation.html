@@ -3,9 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Movies and Users API Documentation</title>
 </head>
 <body>
-    hiii
+
+<h1>Movies and Users API Documentation</h1>
+
+<p>This documentation provides details on the available endpoints and their corresponding operations for the Movies and Users API.</p>
+
+<h2>Movie Operations</h2>
+
+<table>
+    <tr>
+        <th>Request</th>
+        <th>URL</th>
+        <th>Response</th>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/api/movies</td>
+        <td>Retrieve a list of all movies</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/api/movies/{movie_id}</td>
+        <td>Retrieve details of a specific movie</td>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>/api/movies</td>
+        <td>Create a new movie</td>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td>/api/movies/{movie_id}</td>
+        <td>Update details of a specific movie</td>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td>/api/movies/{movie_id}</td>
+        <td>Delete a specific movie</td>
+    </tr>
+</table>
+
+<h2>User Operations</h2>
+
+<table>
+    <tr>
+        <th>Request</th>
+        <th>URL</th>
+        <th>Response</th>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/api/users</td>
+        <td>Retrieve a list of all users</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/api/users/{user_id}</td>
+        <td>Retrieve details of a specific user</td>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>/api/users</td>
+        <td>Create a new user</td>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td>/api/users/{user_id}</td>
+        <td>Update details of a specific user</td>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td>/api/users/{user_id}</td>
+        <td>Delete a specific user</td>
+    </tr>
+</table>
+
 </body>
 </html>
