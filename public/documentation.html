@@ -17,32 +17,84 @@
     <tr>
         <th>Request</th>
         <th>URL</th>
+        <th>Body</th>
         <th>Response</th>
     </tr>
     <tr>
         <td>GET</td>
-        <td>/api/movies</td>
+        <td>/movies</td>
+        <td></td>
         <td>Retrieve a list of all movies</td>
     </tr>
     <tr>
         <td>GET</td>
-        <td>/api/movies/{movie_id}</td>
+        <td>/movies/{movie_id}</td>
+        <td></td>
         <td>Retrieve details of a specific movie</td>
     </tr>
     <tr>
         <td>POST</td>
-        <td>/api/movies</td>
-        <td>Create a new movie</td>
+        <td>/movies</td>
+        <td>
+            JSON object with movie data
+            <pre>
+{
+  "Title": "Example Movie",
+  "Description": "A thrilling movie",
+  "Genre": {
+    "Name": "Thriller",
+    "Description": "Exciting and suspenseful"
+  },
+  "Director": {
+    "Name": "John Doe",
+    "Bio": "A talented director"
+  },
+  "Actors": ["Actor1", "Actor2"],
+  "ImagePath": "/path/to/image",
+  "Featured": true
+}
+            </pre>
+        </td>
+        <td>
+            Status Code: `201 Created`<br>
+            JSON object with the created movie
+            <pre>
+{
+  "_id": "uniqueMovieId",
+  "Title": "Example Movie",
+  "Description": "A thrilling movie",
+  "Genre": {
+    "Name": "Thriller",
+    "Description": "Exciting and suspenseful"
+  },
+  "Director": {
+    "Name": "John Doe",
+    "Bio": "A talented director"
+  },
+  "Actors": ["Actor1", "Actor2"],
+  "ImagePath": "/path/to/image",
+  "Featured": true
+}
+            </pre>
+        </td>
     </tr>
     <tr>
-        <td>PUT</td>
-        <td>/api/movies/{movie_id}</td>
-        <td>Update details of a specific movie</td>
+        <td>GET</td>
+        <td>/movies/genre/{Genre}</td>
+        <td></td>
+        <td>Get description by genre</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/movies/director/{Director}</td>
+        <td></td>
+        <td>Get director data by director name</td>
     </tr>
     <tr>
         <td>DELETE</td>
-        <td>/api/movies/{movie_id}</td>
-        <td>Delete a specific movie</td>
+        <td>/users/{Username}/movies/{MovieID}</td>
+        <td></td>
+        <td>Remove a movie from a user's favorites</td>
     </tr>
 </table>
 
@@ -52,31 +104,82 @@
     <tr>
         <th>Request</th>
         <th>URL</th>
+        <th>Body</th>
         <th>Response</th>
     </tr>
     <tr>
         <td>GET</td>
-        <td>/api/users</td>
+        <td>/users</td>
+        <td></td>
         <td>Retrieve a list of all users</td>
     </tr>
     <tr>
         <td>GET</td>
-        <td>/api/users/{user_id}</td>
+        <td>/users/{user_id}</td>
+        <td></td>
         <td>Retrieve details of a specific user</td>
     </tr>
     <tr>
         <td>POST</td>
-        <td>/api/users</td>
-        <td>Create a new user</td>
+        <td>/users</td>
+        <td>
+            JSON object with user data
+            <pre>
+{
+  "Username": "exampleUser",
+  "Password": "examplePassword",
+  "Email": "user@example.com",
+  "Birthday": "2000-01-01"
+}
+            </pre>
+        </td>
+        <td>
+            Status Code: `201 Created`<br>
+            JSON object with the created user
+            <pre>
+{
+  "_id": "uniqueUserId",
+  "Username": "exampleUser",
+  "Password": "examplePassword",
+  "Email": "user@example.com",
+  "Birthday": "2000-01-01",
+  "FavoriteMovies": []
+}
+            </pre>
+        </td>
     </tr>
     <tr>
         <td>PUT</td>
-        <td>/api/users/{user_id}</td>
-        <td>Update details of a specific user</td>
+        <td>/users/{Username}</td>
+        <td>
+            JSON object with updated user data
+            <pre>
+{
+  "Username": "newUsername",
+  "Password": "newPassword",
+  "Email": "newEmail@example.com",
+  "Birthday": "1990-01-01"
+}
+            </pre>
+        </td>
+        <td>
+            JSON object with the updated user
+            <pre>
+{
+  "_id": "uniqueUserId",
+  "Username": "newUsername",
+  "Password": "newPassword",
+  "Email": "newEmail@example.com",
+  "Birthday": "1990-01-01",
+  "FavoriteMovies": []
+}
+            </pre>
+        </td>
     </tr>
     <tr>
         <td>DELETE</td>
-        <td>/api/users/{user_id}</td>
+        <td>/users/{Username}</td>
+        <td></td>
         <td>Delete a specific user</td>
     </tr>
 </table>
