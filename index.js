@@ -1,13 +1,11 @@
 const express = require("express");
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 const uuid = require("uuid");
 const mongoose = require("mongoose");
 const Models = require("./models.js");
 const bodyParser = require("body-parser");
-
 const { check, validationResult } = require("express-validator");
+const cors = require("cors");
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -22,13 +20,11 @@ mongoose.connect( process.env.CONNECTION_URI, {
   useUnifiedTopology: true,
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-const cors = require("cors");
+app.use(bodyParser.json());
+app.use(express.static('public'));
+app.use(express.urlencoded({extended: true}))
 app.use(cors());
 let auth = require("./auth")(app);
-app.use(express.static("public"));
-
-
 const passport = require("passport");
 require("./passport");
 
