@@ -12,9 +12,6 @@ const { check, validationResult } = require("express-validator");
 const Movies = Models.Movie;
 const Users = Models.User;
 
-const cors = require("cors");
-app.use(cors());
-
 // mongoose.connect("mongodb://localhost:27017/cfDB", {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
@@ -26,8 +23,12 @@ mongoose.connect( process.env.CONNECTION_URI, {
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
+const cors = require("cors");
+app.use(cors());
 let auth = require("./auth")(app);
 app.use(express.static("public"));
+
+app.use(passport.initialize());
 const passport = require("passport");
 require("./passport");
 
