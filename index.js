@@ -28,7 +28,7 @@ app.use(cors());
 let auth = require("./auth")(app);
 app.use(express.static("public"));
 
-app.use(passport.initialize());
+
 const passport = require("passport");
 require("./passport");
 
