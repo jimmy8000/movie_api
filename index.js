@@ -32,7 +32,6 @@ app.use(express.static("public"));
 const passport = require("passport");
 require("./passport");
 
-let hashedPassword = Users.hashPassword(req.body.Password);
 
 //Add a user
 
@@ -60,7 +59,7 @@ app.post(
       return res.status(422).json({ errors: errors.array() });
     }
 
-    
+    let hashedPassword = Users.hashPassword(req.body.Password);
     await Users.findOne({ Username: req.body.Username }) // Search to see if a user with the requested username already exists
       .then((user) => {
         if (user) {
@@ -228,6 +227,7 @@ app.put(
     if (req.user.Username !== req.params.Username) {
       return res.status(400).send("Permission denied");
     }
+    let hashedPassword = Users.hashPassword(req.body.Password);
     await Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
