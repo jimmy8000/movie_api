@@ -18,7 +18,7 @@ This is a Movie API application that allows users to search for movies and retri
 - React.js
 
 ## Installation
-1. Clone the repository: `git clone https://github.com/jimmy8000/movie-api.git`
+1. Clone the repository: `git clone https://github.com/jimmy8000/movie_api.git`
 2. Install the dependencies: `npm install`
 3. Set up the database connection in `config.js`
 4. Start the server: `npm start`
