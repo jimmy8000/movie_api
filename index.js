@@ -20,7 +20,7 @@ app.use(cors());
 //   useUnifiedTopology: true,
 // });
 
-mongoose.connect( process.env.CONNECTION_URI, {
+mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -31,7 +31,15 @@ app.use(express.static("public"));
 const passport = require("passport");
 require("./passport");
 
-//Add a user
+/**
+ * Post request to create a new user
+ * @param {String} Username - The username of the user
+ * @param {String} Password - The password of the user
+ * @param {String} Email - The email of the user
+ * @param {Date} Birthday - The birthday of the user
+ * @returns {Object} - The user object
+ * @throws {Error} - The error message
+ */
 
 app.post(
   "/users",
@@ -85,8 +93,22 @@ app.post(
       });
   }
 );
-
-//Add a movie
+/**
+ * Create a new movie
+ * @param {String} Title - The title of the movie
+ * @param {String} Description - The description of the movie
+ * @param {Object} Genre - The genre of the movie
+ * @param {String} Genre.Name - The name of the genre
+ * @param {String} Genre.Description - The description of the genre
+ * @param {Object} Director - The director of the movie
+ * @param {String} Director.Name - The name of the director
+ * @param {String} Director.Bio - The biography of the director
+ * @param {String[]} Actors - The list of actors in the movie
+ * @param {String} ImagePath - The path to the movie's image
+ * @param {Boolean} Featured - Indicates if the movie is featured
+ * @returns {Object} - The movie object
+ * @throws {Error} - The error message
+ */
 app.post("/movies", async (req, res) => {
   await Movies.findOne({ Title: req.body.Title })
     .then((movie) => {
@@ -123,7 +145,9 @@ app.post("/movies", async (req, res) => {
     });
 });
 
-//Get all movies
+/**
+ * Get request to get all movies
+ */
 app.get(
   "/movies",
   passport.authenticate("jwt", { session: false }),
@@ -138,8 +162,9 @@ app.get(
       });
   }
 );
-
-//Get all users
+/**
+ * Get request to get all users\
+ */
 app.get("/users", async (req, res) => {
   await Users.find()
     .then((user) => {
@@ -150,7 +175,12 @@ app.get("/users", async (req, res) => {
       res.status(500).send("Error: " + err);
     });
 });
-//Get a Movie by name
+/**
+ * Get request to get a movie by title
+ * @param {String} Title - The title of the movie
+ * @returns {Object} - The movie object
+ * @throws {Error} - The error message
+ */
 app.get(
   "/movies/:Title",
   passport.authenticate("jwt", { session: false }),
@@ -165,8 +195,12 @@ app.get(
       });
   }
 );
-
-//Get a user by name
+/**
+ * Get request to get a user by username
+ * @param {String} username - The username of the user
+ * @returns {Object} - The user object
+ * @throws {Error} - The error message
+ */
 app.get("/users/:Username", async (req, res) => {
   await Users.findOne({ Username: req.params.Username })
     .then((user) => {
@@ -177,7 +211,12 @@ app.get("/users/:Username", async (req, res) => {
       res.status(500).send("Error: " + err);
     });
 });
-// Get description by genre
+/**
+ * Get request to get a genre by name
+ * @param {String} Genre - The name of the genre
+ * @returns {Object} - The genre object
+ * @throws {Error} - The error message
+ */
 app.get(
   "/movies/genre/:Genre",
   passport.authenticate("jwt", { session: false }),
@@ -197,7 +236,12 @@ app.get(
   }
 );
 
-//Get director data by director name
+/**
+ * Get request to get director by name
+ * @param {String} Director - The name of the director
+ * @returns {Object} - The director object
+ * @throws {Error} - The error message
+ */
 app.get(
   "/movies/director/:Director",
   passport.authenticate("jwt", { session: false }),
@@ -218,7 +262,15 @@ app.get(
   }
 );
 
-//Update users info by username
+/**
+ * Update a user by username
+ * @param {String} Username - The username of the user
+ * @param {String} Password - The password of the user
+ * @param {String} Email - The email of the user
+ * @param {Date} Birthday - The birthday of the user
+ * @returns {Object} - The updated user object
+ * @throws {Error} - The error message
+ */
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -249,7 +301,13 @@ app.put(
   }
 );
 
-//Add a movie to a user's favorites
+/**
+ * Add a movie to a user's favorites
+ * @param {String} Username - The username of the user
+ * @param {String} MovieID - The ID of the movie
+ * @returns {Object} - The updated user object
+ * @throws {Error} - The error message
+ */
 app.post(
   "/users/:Username/Movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -271,7 +329,13 @@ app.post(
   }
 );
 
-// Remove a movie from a user's favorites
+/**
+ * Remove a movie from the user's favorites
+ * @param {String} Username - The username of the user
+ * @param {String} MovieID - The ID of the movie
+ * @returns {Object} - The updated user object
+ * @throws {Error} - The error message
+ */
 app.delete(
   "/users/:Username/movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -302,7 +366,12 @@ app.delete(
   }
 );
 
-//Delete a user by username
+/**
+ * Delete a user by username
+ * @param {String} username - The username of the user
+ * @returns {String} - The success message
+ * @throws {Error} - The error message
+ */
 app.delete(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -323,6 +392,6 @@ app.delete(
 );
 
 const port = process.env.PORT || 8080;
-app.listen(port, '0.0.0.0',() => {
- console.log('Listening on Port ' + port);
+app.listen(port, "0.0.0.0", () => {
+  console.log("Listening on Port " + port);
 });
